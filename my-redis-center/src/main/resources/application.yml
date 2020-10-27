@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: my-redis
+  redis:
+    host: localhost
+    password:
+    port: 6379
+  profiles:
+    include:
+      - rediscof
+server:
+  port: 8082
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1-server:8761/eureka/,http://eureka2-server:8762/eureka/

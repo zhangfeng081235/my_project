@@ -16,6 +16,7 @@
         <module>gateway</module>
         <module>my-eurekacenter</module>
         <module>my-usercenter</module>
+        <module>my-redis-center</module>
     </modules>
 
     <dependencyManagement>
