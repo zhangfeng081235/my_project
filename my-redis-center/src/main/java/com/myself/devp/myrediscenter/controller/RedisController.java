@@ -30,5 +30,6 @@ public class RedisController {
           String d=new String("jjj");
           System.out.println(c.equals(d));
           Executors.newFixedThreadPool(8);
+
      }
 }
