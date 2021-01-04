@@ -1,11 +1,1 @@
-spring:
-  redis:
-    host: localhost
-    password:
-    port: 6379
-    jedis:
-      pool:
-        max-active: 8
-        max-wait: -1
-        max-idle: 8
-        min-idle: 0
+

@@ -15,18 +15,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Configuration
 @EnableCaching
 public class RedisConfig  extends CachingConfigurerSupport {
-    @Value("${spring.redis.host}")
-    private String  host;
-    @Value("${spring.redis.port}")
-    private  String port;
-    @Value("${spring.redis.max-active}")
-    private  String max_active;
-    @Value("${spring.redis.max-wait}")
-    private  String max_wait;
-    @Value("${spring.redis.max-idle}")
-    private  String max_idle;
-    @Value("${spring.redis.min-idle}")
-    private  String min_idle;
 
     @Bean
     RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
@@ -36,8 +24,11 @@ public class RedisConfig  extends CachingConfigurerSupport {
         // 设置值（value）的序列化采用Jackson2JsonRedisSerializer。
         redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
         // 设置键（key）的序列化采用StringRedisSerializer。
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+        StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
+        redisTemplate.setKeySerializer(stringRedisSerializer);
+        redisTemplate.setHashKeySerializer(stringRedisSerializer);
+        redisTemplate.setValueSerializer(stringRedisSerializer);
+        redisTemplate.setHashValueSerializer(stringRedisSerializer);
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }

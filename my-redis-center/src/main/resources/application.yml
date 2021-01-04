@@ -1,13 +1,19 @@
 spring:
   application:
     name: my-redis
+    #整合哨兵机制集群
   redis:
-    host: localhost
-    password:
-    port: 6379
-  profiles:
-    include:
-      - rediscof
+    password: redis
+    sentinel:
+      master: mymaster
+      nodes: 192.168.7.231:26379,192.168.7.232:26378,192.168.7.233:26377
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+    timeout: 10000
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver
     url: jdbc:oracle:thin:@192.168.7.8:1521/orcl
@@ -28,6 +34,6 @@ eureka:
     service-url:
       defaultZone: http://eureka1-server:8761/eureka/,http://eureka2-server:8762/eureka/
 mybatis:
-  config-location: classpath:com/myself/devp/myrediscenter/mapper/*.xml
-  mapper-locations: classpath*:/mapper/*.xml
+  mapper-locations: classpath*:/com/myself/devp/myrediscenter/model/mapper/*.xml
+  type-aliases-package: com.myself.devp.myrediscenter.model
 
